@@ -1,0 +1,27 @@
+{
+  "serviciosItApp": {
+    "solicitud": {
+      "home": {
+        "title": "Solicituds",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Solicitud",
+        "createOrEditLabel": "Create or edit a Solicitud",
+        "notFound": "No Solicituds found"
+      },
+      "created": "A new Solicitud is created with identifier {{ param }}",
+      "updated": "A Solicitud is updated with identifier {{ param }}",
+      "deleted": "A Solicitud is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Solicitud {{ id }}?"
+      },
+      "detail": {
+        "title": "Solicitud"
+      },
+      "id": "ID",
+      "codigo": "Codigo",
+      "descripcion": "Descripcion",
+      "usuario": "Usuario",
+      "servicio": "Servicio"
+    }
+  }
+}

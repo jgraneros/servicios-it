@@ -1,0 +1,9 @@
+{
+  "serviciosItApp": {
+    "EstadoServicio": {
+      "null": "",
+      "ACTIVO": "ACTIVO",
+      "INACTIVO": "INACTIVO"
+    }
+  }
+}
