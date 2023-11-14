@@ -1,0 +1,21 @@
+entity Servicio {
+	nombre String
+    descripcion String
+	propiedad String
+    estado EstadoServicio
+}
+
+enum EstadoServicio {
+	ACTIVO
+    INACTIVO
+}
+
+entity Solicitud {
+	codigo UUID
+    descripcion String
+}
+
+relationship OneToOne {
+	Solicitud{servicio} to Servicio{solicitud}
+}
+
