@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="servicio">
+      <h2 data-cy="servicioDetailsHeading"><span jhiTranslate="serviciosItApp.servicio.detail.title">Servicio</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ servicio.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="serviciosItApp.servicio.nombre">Nombre</span></dt>
+        <dd>
+          <span>{{ servicio.nombre }}</span>
+        </dd>
+        <dt><span jhiTranslate="serviciosItApp.servicio.descripcion">Descripcion</span></dt>
+        <dd>
+          <span>{{ servicio.descripcion }}</span>
+        </dd>
+        <dt><span jhiTranslate="serviciosItApp.servicio.propiedad">Propiedad</span></dt>
+        <dd>
+          <span>{{ servicio.propiedad }}</span>
+        </dd>
+        <dt><span jhiTranslate="serviciosItApp.servicio.estado">Estado</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'serviciosItApp.EstadoServicio.' + servicio.estado }}">{{ servicio.estado }}</span>
+        </dd>
+        <dt><span jhiTranslate="serviciosItApp.servicio.solicitud">Solicitud</span></dt>
+        <dd>
+          <div *ngIf="servicio.solicitud">
+            <a [routerLink]="['/solicitud', servicio.solicitud.id, 'view']">{{ servicio.solicitud.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/servicio', servicio.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>
