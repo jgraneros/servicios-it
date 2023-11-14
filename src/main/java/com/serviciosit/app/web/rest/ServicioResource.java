@@ -2,6 +2,7 @@ package com.serviciosit.app.web.rest;
 
 import com.serviciosit.app.domain.Servicio;
 import com.serviciosit.app.repository.ServicioRepository;
+import com.serviciosit.app.security.AuthoritiesConstants;
 import com.serviciosit.app.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
@@ -46,6 +48,7 @@ public class ServicioResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Servicio> createServicio(@RequestBody Servicio servicio) throws URISyntaxException {
         log.debug("REST request to save Servicio : {}", servicio);
         if (servicio.getId() != null) {
@@ -69,6 +72,7 @@ public class ServicioResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Servicio> updateServicio(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody Servicio servicio
@@ -104,6 +108,7 @@ public class ServicioResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Servicio> partialUpdateServicio(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody Servicio servicio
@@ -177,6 +182,7 @@ public class ServicioResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Void> deleteServicio(@PathVariable Long id) {
         log.debug("REST request to delete Servicio : {}", id);
         servicioRepository.deleteById(id);
