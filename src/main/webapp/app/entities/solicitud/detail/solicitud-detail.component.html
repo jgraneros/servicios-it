@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="solicitud">
+      <h2 data-cy="solicitudDetailsHeading"><span jhiTranslate="serviciosItApp.solicitud.detail.title">Solicitud</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ solicitud.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="serviciosItApp.solicitud.codigo">Codigo</span></dt>
+        <dd>
+          <span>{{ solicitud.codigo }}</span>
+        </dd>
+        <dt><span jhiTranslate="serviciosItApp.solicitud.descripcion">Descripcion</span></dt>
+        <dd>
+          <span>{{ solicitud.descripcion }}</span>
+        </dd>
+        <dt><span jhiTranslate="serviciosItApp.solicitud.servicio">Servicio</span></dt>
+        <dd>
+          <div *ngIf="solicitud.servicio">
+            <a [routerLink]="['/servicio', solicitud.servicio.id, 'view']">{{ solicitud.servicio.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/solicitud', solicitud.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

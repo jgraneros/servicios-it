@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-servicio-heading" data-cy="ServicioCreateUpdateHeading" jhiTranslate="serviciosItApp.servicio.home.createOrEditLabel">
+        Crear o editar Servicio
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="serviciosItApp.servicio.nombre" for="field_nombre">Nombre</label>
+          <input type="text" class="form-control" name="nombre" id="field_nombre" data-cy="nombre" formControlName="nombre" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="serviciosItApp.servicio.descripcion" for="field_descripcion">Descripcion</label>
+          <input
+            type="text"
+            class="form-control"
+            name="descripcion"
+            id="field_descripcion"
+            data-cy="descripcion"
+            formControlName="descripcion"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="serviciosItApp.servicio.propiedad" for="field_propiedad">Propiedad</label>
+          <input type="text" class="form-control" name="propiedad" id="field_propiedad" data-cy="propiedad" formControlName="propiedad" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="serviciosItApp.servicio.estado" for="field_estado">Estado</label>
+          <select class="form-control" name="estado" formControlName="estado" id="field_estado" data-cy="estado">
+            <option [ngValue]="null">{{ 'serviciosItApp.EstadoServicio.null' | translate }}</option>
+            <option *ngFor="let estadoServicio of estadoServicioValues" [value]="estadoServicio">
+              {{ 'serviciosItApp.EstadoServicio.' + estadoServicio | translate }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

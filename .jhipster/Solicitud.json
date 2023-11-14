@@ -1,0 +1,26 @@
+{
+  "applications": "*",
+  "changelogDate": "20231114152808",
+  "entityTableName": "solicitud",
+  "fields": [
+    {
+      "fieldName": "codigo",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Solicitud",
+  "relationships": [
+    {
+      "otherEntityName": "servicio",
+      "otherEntityRelationshipName": "solicitud",
+      "relationshipName": "servicio",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}
