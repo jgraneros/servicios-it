@@ -1,0 +1,110 @@
+<div>
+  <h2 id="page-heading" data-cy="ServicioHeading">
+    <span jhiTranslate="serviciosItApp.servicio.home.title">Servicios</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="serviciosItApp.servicio.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-servicio"
+        [routerLink]="['/servicio/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="serviciosItApp.servicio.home.createLabel">Crear nuevo Servicio</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="servicios?.length === 0">
+    <span jhiTranslate="serviciosItApp.servicio.home.notFound">Ningún Servicios encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="servicios && servicios.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nombre">
+            <div class="d-flex">
+              <span jhiTranslate="serviciosItApp.servicio.nombre">Nombre</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="descripcion">
+            <div class="d-flex">
+              <span jhiTranslate="serviciosItApp.servicio.descripcion">Descripcion</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="propiedad">
+            <div class="d-flex">
+              <span jhiTranslate="serviciosItApp.servicio.propiedad">Propiedad</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="estado">
+            <div class="d-flex">
+              <span jhiTranslate="serviciosItApp.servicio.estado">Estado</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="soliictud.id">
+            <div class="d-flex">
+              <span jhiTranslate="serviciosItApp.servicio.soliictud">Soliictud</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let servicio of servicios; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/servicio', servicio.id, 'view']">{{ servicio.id }}</a>
+          </td>
+          <td>{{ servicio.nombre }}</td>
+          <td>{{ servicio.descripcion }}</td>
+          <td>{{ servicio.propiedad }}</td>
+          <td jhiTranslate="{{ 'serviciosItApp.EstadoServicio.' + servicio.estado }}">{{ servicio.estado }}</td>
+          <td>
+            <div *ngIf="servicio.soliictud">
+              <a [routerLink]="['/solicitud', servicio.soliictud.id, 'view']">{{ servicio.soliictud.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <a [routerLink]="['/servicio', servicio.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+              </a>
+
+              <a [routerLink]="['/servicio', servicio.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </a>
+
+              <button type="submit" (click)="delete(servicio)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
